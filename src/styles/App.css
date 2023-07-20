@@ -1,0 +1,11 @@
+#root {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.App {
+  width: 100vw;
+  max-height: 100vh;
+  aspect-ratio: 1920 / 1080;
+}
