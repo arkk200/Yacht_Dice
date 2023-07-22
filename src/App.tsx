@@ -4,9 +4,9 @@ import "@/styles/App.css";
 import "@/styles/reset.css";
 import DiceCup from "./components/mesh/DiceCup/DiceCup";
 import { Suspense } from "react";
-import { Physics, RigidBody } from "@react-three/rapier";
-import Dice from "./components/mesh/Dice/Dice";
+import { Physics } from "@react-three/rapier";
 import DiceTray from "./components/mesh/DiceTray/DiceTray";
+import Dices from "./components/mesh/Dices/Dices";
 
 function App() {
   return (
@@ -18,19 +18,9 @@ function App() {
 
         <Suspense>
           <Physics gravity={[0, -2, 0]} colliders={false} debug>
-            <RigidBody
-              colliders="cuboid"
-              restitution={0.3}
-              position={[0, 1, 0]}
-            >
-              <Dice />
-            </RigidBody>
-            <RigidBody colliders="trimesh" type="fixed" position={[0, 1, 0]}>
-              <DiceCup />
-            </RigidBody>
-            <RigidBody colliders="trimesh" type="fixed">
-              <DiceTray />
-            </RigidBody>
+            <Dices />
+            <DiceCup />
+            <DiceTray />
           </Physics>
         </Suspense>
       </Canvas>
