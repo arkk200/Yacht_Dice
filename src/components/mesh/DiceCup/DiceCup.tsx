@@ -1,13 +1,9 @@
-import DiceCupFloor from "./DiceCupFloor/DiceCupFloor";
-import DiceCupSide from "./DiceCupSide/DiceCupSide";
+import { useGLTF } from "@react-three/drei";
 
 const DiceCup = () => {
-  return (
-    <group>
-      <DiceCupSide />
-      <DiceCupFloor />
-    </group>
-  );
+  const gltf = useGLTF("/diceCup.glb");
+
+  return <primitive object={gltf.scene} />;
 };
 
 export default DiceCup;
