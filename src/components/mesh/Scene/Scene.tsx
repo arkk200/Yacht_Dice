@@ -22,11 +22,11 @@ const Scene = () => {
   }, [onClickToCall]);
 
   return (
-    <Canvas camera={{ position: [0, 7, 0] }}>
-      <OrthographicCamera />
+    <Canvas>
+      <OrbitControls />
       <ambientLight intensity={1} />
       <pointLight position={[5, 5, 5]} />
-      <OrbitControls />
+      <OrthographicCamera makeDefault position={[0, 7, 0]} zoom={70} />
 
       <Suspense>
         <Physics gravity={[0, -2, 0]} colliders={false} debug>
