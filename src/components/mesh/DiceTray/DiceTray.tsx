@@ -5,7 +5,7 @@ const DiceTray = () => {
   const gltf = useGLTF("/diceTray.glb");
 
   return (
-    <RigidBody colliders="trimesh" type="fixed" position={[0, -1.5, 0]}>
+    <RigidBody colliders="trimesh" type="fixed" position={[0, -2, 0]}>
       <primitive object={gltf.scene} />
     </RigidBody>
   );

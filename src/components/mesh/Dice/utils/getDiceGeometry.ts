@@ -4,8 +4,8 @@ import { BoxGeometry, PlaneGeometry, Vector3 } from "three";
 const params = {
   numberOfDice: 1,
   segments: 40,
-  edgeRadius: 0.035,
-  notchRadius: 0.06,
+  edgeRadius: 0.07,
+  notchRadius: 0.09,
   notchDepth: 0.05,
 } as const;
 
