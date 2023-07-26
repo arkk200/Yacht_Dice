@@ -3,7 +3,9 @@ import * as S from "./style";
 const ScoreSheet = () => {
   return (
     <S.Container>
-      <S.StyledScoreSheet></S.StyledScoreSheet>
+      <S.ScoreSheetBackground>
+        <S.StyledScoreSheet>score sheet</S.StyledScoreSheet>
+      </S.ScoreSheetBackground>
     </S.Container>
   );
 };
