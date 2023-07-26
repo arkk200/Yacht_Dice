@@ -1,5 +1,4 @@
 import { useEventAction } from "@/providers/DebuggingToolProvider/DebuggingToolProvider.hooks";
-import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import { Suspense, useEffect } from "react";
@@ -22,8 +21,8 @@ const Scene = () => {
   }, [onClickToCall]);
 
   return (
-    <Canvas camera={{ position: [0, 18, 0], fov: 20 }} shadows>
-      <OrbitControls />
+    <Canvas camera={{ position: [0, 15, 0], fov: 20 }} shadows>
+      {/* <OrbitControls /> */}
       <ambientLight intensity={1} />
       <directionalLight position={[3, 25, -3]} castShadow />
       {/* <OrthographicCamera makeDefault position={[0, 7, 0]} zoom={70} /> */}

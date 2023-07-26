@@ -6,11 +6,13 @@
 }
 
 .App {
+  display: flex;
   width: 100vw;
   max-height: 100vh;
   aspect-ratio: 1920 / 1080;
-}
 
-canvas {
+  background-image: url(lying-cat.png);
+  background-repeat: no-repeat;
+  background-size: cover;
   background-color: white;
 }

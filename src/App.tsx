@@ -7,6 +7,14 @@ function App() {
   return (
     <DebuggingToolProvider>
       <div className="App">
+        <div
+          style={{
+            backgroundColor: "skyblue",
+            width: "32vw",
+            height: "100%",
+            flexShrink: 0,
+          }}
+        ></div>
         <Scene />
       </div>
     </DebuggingToolProvider>

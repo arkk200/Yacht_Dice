@@ -16,7 +16,7 @@ const DiceCup = () => {
   }, [gltf.scene]);
 
   return (
-    <RigidBody colliders="trimesh" type="fixed" position={[1.5, 1, 0]}>
+    <RigidBody colliders="trimesh" type="fixed" position={[1, 1, 0]}>
       <primitive object={gltf.scene} />
     </RigidBody>
   );
