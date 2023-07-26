@@ -1,11 +1,11 @@
-import { OrbitControls, OrthographicCamera } from "@react-three/drei";
+import { useEventAction } from "@/providers/DebuggingToolProvider/DebuggingToolProvider.hooks";
+import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import { Suspense, useEffect } from "react";
-import Dices from "../Dices/Dices";
 import DiceCup from "../DiceCup/DiceCup";
 import DiceTray from "../DiceTray/DiceTray";
-import { useEventAction } from "@/providers/DebuggingToolProvider/DebuggingToolProvider.hooks";
+import Dices from "../Dices/Dices";
 
 const Scene = () => {
   const { onClickToCall } = useEventAction();
@@ -22,11 +22,11 @@ const Scene = () => {
   }, [onClickToCall]);
 
   return (
-    <Canvas>
+    <Canvas camera={{ position: [0, 18, 0], fov: 20 }} shadows>
       <OrbitControls />
       <ambientLight intensity={1} />
-      <pointLight position={[5, 5, 5]} />
-      <OrthographicCamera makeDefault position={[0, 7, 0]} zoom={70} />
+      <directionalLight position={[3, 25, -3]} castShadow />
+      {/* <OrthographicCamera makeDefault position={[0, 7, 0]} zoom={70} /> */}
 
       <Suspense>
         <Physics gravity={[0, -2, 0]} colliders={false} debug>
