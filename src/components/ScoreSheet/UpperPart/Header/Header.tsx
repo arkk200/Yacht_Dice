@@ -10,17 +10,12 @@ const Header = () => {
         </S.TurnBox>
         <S.Categories>Categories</S.Categories>
       </S.FirstPart>
-      <img
-        src="/score-sheet.png"
-        alt="score sheet"
-        style={{
-          position: "fixed",
-          height: "83.25vh",
-          opacity: 0.3,
-          top: 62,
-          left: -20,
-        }}
-      />
+      <S.ProfileBox>
+        <S.ProfileImage src="/lying-cat.png" />
+      </S.ProfileBox>
+      <S.ProfileBox>
+        <S.ProfileImage src="/lying-cat.png" />
+      </S.ProfileBox>
     </S.StyledHeader>
   );
 };

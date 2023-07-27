@@ -38,3 +38,19 @@ export const Categories = styled.p`
   color: ${color.gray10};
   background-color: ${color.gray80};
 `;
+
+export const ProfileBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  border: 0.2vw solid ${color.gray80};
+`;
+
+export const ProfileImage = styled.img`
+  max-width: 5vw;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+`;
