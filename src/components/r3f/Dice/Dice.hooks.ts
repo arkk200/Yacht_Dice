@@ -1,5 +1,5 @@
-import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 import { BoxGeometry, PlaneGeometry, Vector3 } from "three";
+import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 
 const params = {
   numberOfDice: 1,
@@ -9,7 +9,7 @@ const params = {
   notchDepth: 0.05,
 } as const;
 
-export const getDiceGeometry = () => {
+const getDiceGeometry = () => {
   const boxGeometry = new BoxGeometry(
     0.5,
     0.5,
@@ -116,7 +116,7 @@ export const getDiceGeometry = () => {
   return bufferGeometry;
 };
 
-export const getDiceInnerGeometry = () => {
+const getDiceInnerGeometry = () => {
   const baseGeometry = new PlaneGeometry(
     0.5 - 2 * params.edgeRadius,
     0.5 - 2 * params.edgeRadius
@@ -150,3 +150,12 @@ export const getDiceInnerGeometry = () => {
     false
   );
 };
+
+const useDiceGeometries = () => {
+  const geometry = getDiceGeometry();
+  const innerGeometry = getDiceInnerGeometry();
+
+  return { geometry, innerGeometry };
+};
+
+export default useDiceGeometries;

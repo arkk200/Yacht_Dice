@@ -12,17 +12,6 @@ const ScoreSheet = () => {
           <LowerPart />
         </S.StyledScoreSheet>
       </S.ScoreSheetBackground>
-      {/* <img
-        src="/score-sheet.png"
-        alt="score sheet"
-        style={{
-          position: "fixed",
-          height: "83.25vh",
-          opacity: 0.3,
-          top: 62,
-          left: -20,
-        }}
-      /> */}
     </S.Container>
   );
 };

@@ -9,20 +9,17 @@ const getCalculatedDiceNumber = (x: number, y: number, z: number): number => {
 
   console.log(x.toFixed(4), y.toFixed(4), z.toFixed(4));
 
-  switch (true) {
-    case (isZero(z) && isZero(x)) || (isPiOrMinusPi(z) && isPiOrMinusPi(x)):
-      return 1;
-    case (isZero(x) && isHalfPi(z)) || (isPiOrMinusPi(x) && isMinusHalfPi(z)):
-      return 2;
-    case (isMinusHalfPi(x) && isZero(y)) || (isHalfPi(x) && isPiOrMinusPi(y)):
-      return 3;
-    case (isHalfPi(x) && isZero(y)) || (isMinusHalfPi(x) && isPiOrMinusPi(y)):
-      return 4;
-    case (isZero(x) && isMinusHalfPi(z)) || (isPiOrMinusPi(x) && isHalfPi(z)):
-      return 5;
-    default:
-      return 6;
-  }
+  if ((isZero(z) && isZero(x)) || (isPiOrMinusPi(z) && isPiOrMinusPi(x)))
+    return 1;
+  if ((isZero(x) && isHalfPi(z)) || (isPiOrMinusPi(x) && isMinusHalfPi(z)))
+    return 2;
+  if ((isMinusHalfPi(x) && isZero(y)) || (isHalfPi(x) && isPiOrMinusPi(y)))
+    return 3;
+  if ((isHalfPi(x) && isZero(y)) || (isMinusHalfPi(x) && isPiOrMinusPi(y)))
+    return 4;
+  if ((isZero(x) && isMinusHalfPi(z)) || (isPiOrMinusPi(x) && isHalfPi(z)))
+    return 5;
+  return 6;
 };
 
 export default getCalculatedDiceNumber;

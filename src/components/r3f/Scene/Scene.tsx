@@ -1,25 +1,11 @@
-import { useEventAction } from "@/providers/DebuggingToolProvider/DebuggingToolProvider.hooks";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import DiceCup from "../DiceCup/DiceCup";
 import DiceTray from "../DiceTray/DiceTray";
 import Dices from "../Dices/Dices";
 
 const Scene = () => {
-  const { onClickToCall } = useEventAction();
-
-  useEffect(() => {
-    onClickToCall({
-      아무숫자출력하기() {
-        console.log(Math.random().toFixed(3));
-      },
-      아무문자출력하기() {
-        console.log(Math.floor(Math.random() * 26 + 10).toString(36));
-      },
-    });
-  }, [onClickToCall]);
-
   return (
     <Canvas camera={{ position: [0, 15, 0], fov: 20 }} shadows>
       {/* <OrbitControls /> */}

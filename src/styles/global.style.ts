@@ -16,6 +16,10 @@ const GlobalStyle = createGlobalStyle`
         border: none;
     }
 
+    button {
+        cursor: pointer;
+    }
+
     p {
         font-family: 'Roboto'
     }

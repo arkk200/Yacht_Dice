@@ -1,15 +1,15 @@
-import { useMemo } from "react";
-import { getDiceGeometry, getDiceInnerGeometry } from "./utils/getDiceGeometry";
-import { DoubleSide } from "three";
 import { RigidBody } from "@react-three/rapier";
+import { useMemo } from "react";
+import { DoubleSide } from "three";
+import useDiceGeometries from "./Dice.hooks";
 
 interface PropTypes {
   position: [number, number, number];
 }
 
 const Dice = ({ position }: PropTypes) => {
-  const geometry = useMemo(getDiceGeometry, []);
-  const innerGeometry = useMemo(getDiceInnerGeometry, []);
+  const { geometry, innerGeometry } = useMemo(useDiceGeometries, []);
+
   return (
     <RigidBody colliders="cuboid" restitution={0.5} position={position}>
       <group>
