@@ -1,3 +1,4 @@
+import LowerPart from "./LowerPart/LowerPart";
 import UpperPart from "./UpperPart/UpperPart";
 import * as S from "./style";
 
@@ -7,9 +8,11 @@ const ScoreSheet = () => {
       <S.ScoreSheetBackground>
         <S.StyledScoreSheet>
           <UpperPart />
+          <S.BonusDesc>Bonus if 1 - 6 over 63 points</S.BonusDesc>
+          <LowerPart />
         </S.StyledScoreSheet>
       </S.ScoreSheetBackground>
-      <img
+      {/* <img
         src="/score-sheet.png"
         alt="score sheet"
         style={{
@@ -19,7 +22,7 @@ const ScoreSheet = () => {
           top: 62,
           left: -20,
         }}
-      />
+      /> */}
     </S.Container>
   );
 };

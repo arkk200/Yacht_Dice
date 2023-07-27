@@ -12,7 +12,8 @@ export const Name = styled.p<{ types: "PRIMARY" | "SECONDARY" }>`
   align-items: center;
   width: 50%;
   padding-left: 1vw;
-  border: 0.1vw solid ${color.gray80};
+  border: solid ${color.gray80};
+  border-width: 0.1vw 0.15vw;
   font-size: 1.75vw;
   box-sizing: border-box;
 
@@ -24,7 +25,7 @@ export const Name = styled.p<{ types: "PRIMARY" | "SECONDARY" }>`
         top: 0;
         right: 0.5vw;
         content: "";
-        width: 0.2vw;
+        width: 0.25vw;
         height: 100%;
         background-color: ${color.gray80};
       }
@@ -33,6 +34,7 @@ export const Name = styled.p<{ types: "PRIMARY" | "SECONDARY" }>`
 
 export const ScoreBox = styled.p`
   width: 25%;
-  border: 0.1vw solid ${color.gray80};
+  border: solid ${color.gray80};
+  border-width: 0.1vw 0.15vw;
   box-sizing: border-box;
 `;

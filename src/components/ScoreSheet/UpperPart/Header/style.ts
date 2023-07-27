@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 
 export const StyledHeader = styled.div`
   display: flex;
-  background-color: red;
   height: 17%;
 `;
 
@@ -18,7 +17,6 @@ export const TurnBox = styled.div`
   align-items: center;
   justify-content: center;
   height: 72%;
-  background-color: skyblue;
 `;
 
 export const Turn = styled.p`

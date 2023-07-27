@@ -4,7 +4,6 @@ import { styled } from "styled-components";
 export const StyledSubTotal = styled.div`
   display: flex;
   height: 9%;
-  background-color: skyblue;
 `;
 
 export const UpperBox = styled.div`
