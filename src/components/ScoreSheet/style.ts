@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const ScoreSheetBackground = styled.div`
   display: flex;
-  width: 28vw;
+  width: 27.5vw;
   height: 100%;
   padding: 0.5vw;
   box-sizing: border-box;

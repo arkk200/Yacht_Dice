@@ -1,4 +1,4 @@
-// import "@/styles/App.css";
+import "@/styles/fonts.style.css";
 import { styled } from "styled-components";
 import ScoreSheet from "./components/ScoreSheet/ScoreSheet";
 import Scene from "./components/r3f/Scene/Scene";

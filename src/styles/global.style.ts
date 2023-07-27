@@ -15,6 +15,10 @@ const GlobalStyle = createGlobalStyle`
         outline: none;
         border: none;
     }
+
+    p {
+        font-family: 'Roboto'
+    }
 `;
 
 export default GlobalStyle;
