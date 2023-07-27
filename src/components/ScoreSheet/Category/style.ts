@@ -31,7 +31,8 @@ export const Name = styled.p<{ types: "PRIMARY" | "SECONDARY" }>`
     `}
 `;
 
-export const ScoreBox = styled.div`
+export const ScoreBox = styled.p`
   width: 25%;
   border: 0.1vw solid ${color.gray80};
+  box-sizing: border-box;
 `;

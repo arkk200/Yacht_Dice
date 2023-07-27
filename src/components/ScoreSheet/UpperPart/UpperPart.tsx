@@ -1,5 +1,6 @@
 import Category from "../Category/Category";
 import Header from "./Header/Header";
+import SubTotal from "./SubTotal/SubTotal";
 
 const UpperPart = () => {
   return (
@@ -11,6 +12,7 @@ const UpperPart = () => {
       <Category name="Fours" />
       <Category name="Fives" />
       <Category name="Sixes" />
+      <SubTotal />
     </>
   );
 };
