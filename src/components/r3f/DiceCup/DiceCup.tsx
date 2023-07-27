@@ -1,4 +1,5 @@
 import { useEventAction } from "@/providers/DebuggingToolProvider/DebuggingToolProvider.hooks";
+import easeInOutQuad from "@/utils/animations/easeInOutQuad";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { RapierRigidBody, RigidBody } from "@react-three/rapier";
@@ -22,10 +23,22 @@ const DiceCup = () => {
   const { onClickToCall } = useEventAction();
   const rigidBodyRef = useRef<RapierRigidBody>(null);
 
+  const x = useRef(0);
+  const targetRotation = (Math.PI / 180) * 110;
+
   useFrame(() => {
-    if (is기울이기) {
-      rigidBodyRef.current?.setNextKinematicRotation(
-        new Quaternion().setFromEuler(new Euler(Math.PI / 4, 0, 0))
+    const rigidBody = rigidBodyRef.current;
+    if (is기울이기 && rigidBody && x.current !== undefined) {
+      x.current += 2;
+
+      if (x.current > 100) {
+        x.current = 100;
+      }
+
+      rigidBody.setNextKinematicRotation(
+        new Quaternion().setFromEuler(
+          new Euler(0, 0, easeInOutQuad(x.current / 100) * targetRotation)
+        )
       );
     }
   });
@@ -34,7 +47,6 @@ const DiceCup = () => {
     onClickToCall({
       컵기울이기() {
         setIs기울이기(true);
-        console.log("컵 기울이는 중...", rigidBodyRef);
       },
     });
   }, [onClickToCall]);
@@ -44,9 +56,9 @@ const DiceCup = () => {
       ref={rigidBodyRef}
       colliders="trimesh"
       type="kinematicPosition"
-      position={[1, 1, 0]}
+      position={[1.5, 1.75, 0]}
     >
-      <primitive object={gltf.scene} />
+      <primitive position={[-0.5, -0.75, 0]} object={gltf.scene} />
     </RigidBody>
   );
 };

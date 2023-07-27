@@ -11,7 +11,12 @@ const Dice = ({ position }: PropTypes) => {
   const { geometry, innerGeometry } = useMemo(useDiceGeometries, []);
 
   return (
-    <RigidBody colliders="cuboid" restitution={0.5} position={position}>
+    <RigidBody
+      colliders="cuboid"
+      restitution={0.75}
+      position={position}
+      friction={0}
+    >
       <group>
         <mesh geometry={geometry} />
         <mesh geometry={innerGeometry}>
