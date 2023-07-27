@@ -18,7 +18,7 @@ const Dice = ({ position }: PropTypes) => {
       friction={0}
     >
       <group>
-        <mesh geometry={geometry} />
+        <mesh geometry={geometry} castShadow />
         <mesh geometry={innerGeometry}>
           <meshStandardMaterial color={0x000000} side={DoubleSide} />
         </mesh>

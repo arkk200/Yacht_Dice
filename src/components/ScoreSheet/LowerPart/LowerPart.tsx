@@ -21,5 +21,5 @@ const LowerPart = () => {
 export default LowerPart;
 
 const Margin = styled.div`
-  margin-top: 2%;
+  margin-top: 2.325%;
 `;

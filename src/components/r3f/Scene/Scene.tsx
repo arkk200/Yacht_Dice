@@ -6,9 +6,11 @@ import DiceCup from "../DiceCup/DiceCup";
 import DiceTray from "../DiceTray/DiceTray";
 import Dices from "../Dices/Dices";
 
+const n = 1;
+
 const Scene = () => {
   return (
-    <Canvas camera={{ position: [0, 15, 0], fov: 20 }} shadows>
+    <Canvas camera={{ position: n ? [0, 0, 15] : [0, 15, 0], fov: 20 }} shadows>
       <OrbitControls />
       <ambientLight intensity={1} />
       <directionalLight position={[3, 25, -3]} castShadow />

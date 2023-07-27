@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 export const StyledTotal = styled.div`
   display: flex;
-  height: 8.75%;
+  height: 8%;
 `;
 
 export const TotalText = styled.p`

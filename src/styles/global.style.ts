@@ -21,7 +21,12 @@ const GlobalStyle = createGlobalStyle`
     }
 
     p {
-        font-family: 'Roboto'
+        font-family: 'Roboto';
+        user-select: none;
+    }
+
+    img {
+        user-select: none;
     }
 `;
 
