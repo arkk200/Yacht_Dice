@@ -43,7 +43,8 @@ export const ProfileBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
+  width: 25%;
+  box-sizing: border-box;
   border: 0.2vw solid ${color.gray80};
 `;
 
