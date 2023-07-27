@@ -1,3 +1,4 @@
+import { color } from "@/styles/theme.style";
 import { styled } from "styled-components";
 
 export const StyledHeader = styled.div`
@@ -34,4 +35,6 @@ export const Categories = styled.p`
   height: 28%;
   padding-left: 0.5vw;
   font-size: 2vw;
+  color: ${color.gray10};
+  background-color: ${color.gray80};
 `;
