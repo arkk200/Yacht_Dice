@@ -14,8 +14,9 @@ const Dice = ({ position }: PropTypes) => {
     <RigidBody
       colliders="cuboid"
       restitution={0.75}
+      friction={0.1}
       position={position}
-      friction={0}
+      ccd
     >
       <group>
         <mesh geometry={geometry} castShadow />

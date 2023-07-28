@@ -25,15 +25,15 @@ const DiceCup = () => {
   useFrame(() => {
     const rigidBody = rigidBodyRef.current;
     if (is기울이기 && rigidBody && x.current !== undefined) {
-      x.current += 4;
+      x.current += 2;
 
-      if (x.current > 100) {
-        x.current = 100;
+      if (x.current > 60) {
+        x.current = 60;
       }
 
       rigidBody.setNextKinematicRotation(
         new Quaternion().setFromEuler(
-          new Euler(0, 0, easeInOutQuad(x.current / 100) * targetRotation)
+          new Euler(0, 0, easeInOutQuad(x.current / 60) * targetRotation)
         )
       );
     }
@@ -44,6 +44,12 @@ const DiceCup = () => {
       주사위굴리기() {
         setIs기울이기(true);
       },
+      주사위흔들기() {
+        window.addEventListener("mousemove", (e) => {
+          e.clientX;
+          e.clientY;
+        });
+      },
     });
   }, [onClickToCall]);
 
@@ -53,6 +59,7 @@ const DiceCup = () => {
       colliders="trimesh"
       type="kinematicPosition"
       position={[1.75, 1.5, 0]}
+      ccd
     >
       <primitive position={[-0.75, -0.5, 0]} object={gltf.scene} />
     </RigidBody>
