@@ -7,6 +7,7 @@ import { useFrame } from "@react-three/fiber";
 import { RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { useEffect, useRef, useState } from "react";
 import { Euler, Quaternion } from "three";
+import DiceCupCover from "../DiceCupCover/DiceCupCover";
 import useHandleDiceCup from "./hooks/useHandleDiceCup.hook";
 
 const DiceCup = () => {
@@ -52,15 +53,18 @@ const DiceCup = () => {
   }, [onClickToCall]);
 
   return (
-    <RigidBody
-      ref={rigidBodyRef}
-      colliders="trimesh"
-      type="kinematicPosition"
-      position={[1.75, 1.5, 0]}
-      ccd
-    >
-      <primitive position={[-0.75, -0.5, 0]} object={gltf.scene} />
-    </RigidBody>
+    <group>
+      <RigidBody
+        ref={rigidBodyRef}
+        colliders="trimesh"
+        type="kinematicPosition"
+        position={[1.75, 1.5, 0]}
+        ccd
+      >
+        <primitive position={[-0.75, -0.5, 0]} object={gltf.scene} />
+      </RigidBody>
+      <DiceCupCover position={[0.5, 1.1, 0]} />
+    </group>
   );
 };
 
