@@ -1,5 +1,5 @@
-import useDocumentEvent from "@/hooks/useDocumentEvent";
-import useWindowEvent from "@/hooks/useWindowEvent";
+import { useDocumentEventListener } from "@/providers/DocumentEventListenerProvider/DocumentEventListenerProvider.hooks";
+import { useWindowEventListener } from "@/providers/WindowEventListenerProvider/WindowEventListenerProvider.hooks";
 import { gameStatusState } from "@/stores/game.store";
 import { RapierRigidBody } from "@react-three/rapier";
 import { RefObject, useEffect } from "react";
@@ -12,10 +12,10 @@ const useHandleDiceCup = (
   const gameStatus = useRecoilValue(gameStatusState);
 
   const { addWindowEventListener, removeWindowEventListener } =
-    useWindowEvent();
+    useWindowEventListener();
 
   const { addDocumentEventListener, removeDocumentEventListener } =
-    useDocumentEvent();
+    useDocumentEventListener();
 
   useEffect(() => {
     const 주사위흔들기 = () => {
@@ -56,7 +56,7 @@ const useHandleDiceCup = (
           diceCupRigidBody.setNextKinematicTranslation(
             new Vector3(
               1.75 + x / sensityDivideNumber,
-              1.5 + Math.sin((x + y) / sensityDivideNumber),
+              1.5 + Math.sin((x + y) / 2000),
               y / sensityDivideNumber
             )
           );
@@ -68,6 +68,7 @@ const useHandleDiceCup = (
       });
       addWindowEventListener("handleBlur", "blur", () => {
         center = null;
+        console.log("blur");
       });
     };
 

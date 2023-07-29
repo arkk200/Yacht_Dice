@@ -1,5 +1,5 @@
-import useWindowEvent from "@/hooks/useWindowEvent";
 import { createContext, useEffect, useMemo, useState } from "react";
+import { useWindowEventListener } from "../WindowEventListenerProvider/WindowEventListenerProvider.hooks";
 import ProviderProps from "../types/provider.types";
 import DebuggingTool from "./DebuggingTool/DebuggingTool";
 
@@ -17,7 +17,7 @@ const DebuggingToolProvider = ({ children }: ProviderProps) => {
     useState<onKeyEnterInfo>({});
 
   const { addWindowEventListener, removeWindowEventListener } =
-    useWindowEvent();
+    useWindowEventListener();
 
   useEffect(() => {
     Object.entries(onKeyEnterCallbacks).map(([code, callback]) => {

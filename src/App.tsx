@@ -1,18 +1,16 @@
 import "@/styles/fonts.styles.css";
 import { useEffect, useState } from "react";
-import { RecoilRoot } from "recoil";
 import { css, styled } from "styled-components";
 import ScoreSheet from "./components/ScoreSheet/ScoreSheet";
 import Scene from "./components/r3f/Scene/Scene";
-import useWindowEvent from "./hooks/useWindowEvent";
-import DebuggingToolProvider from "./providers/DebuggingToolProvider/DebuggingToolProvider";
+import { useWindowEventListener } from "./providers/WindowEventListenerProvider/WindowEventListenerProvider.hooks";
 import GlobalStyle from "./styles/global.styles";
 
 function App() {
   const [isAppFlattened, setIsAppFlattened] = useState(false);
 
   const { addWindowEventListener, removeWindowEventListener } =
-    useWindowEvent();
+    useWindowEventListener();
 
   useEffect(() => {
     addWindowEventListener("handleSizeChange", "resize", () => {
@@ -27,15 +25,13 @@ function App() {
   }, [addWindowEventListener, removeWindowEventListener]);
 
   return (
-    <DebuggingToolProvider>
-      <RecoilRoot>
-        <GlobalStyle />
-        <StyledApp $isAppFlattened={isAppFlattened}>
-          <ScoreSheet />
-          <Scene />
-        </StyledApp>
-      </RecoilRoot>
-    </DebuggingToolProvider>
+    <>
+      <GlobalStyle />
+      <StyledApp $isAppFlattened={isAppFlattened}>
+        <ScoreSheet />
+        <Scene />
+      </StyledApp>
+    </>
   );
 }
 
