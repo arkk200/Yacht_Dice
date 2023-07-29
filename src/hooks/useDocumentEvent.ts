@@ -1,47 +1,47 @@
 import { useRef } from "react";
 
-type EventListnerProps = <K extends string = keyof WindowEventMap>(
+type EventListnerProps = <K extends string = keyof DocumentEventMap>(
   key: string,
   type: K,
-  listener: K extends keyof WindowEventMap
-    ? (this: Window, ev: WindowEventMap[K]) => unknown
+  listener: K extends keyof DocumentEventMap
+    ? (this: Document, ev: DocumentEventMap[K]) => unknown
     : EventListenerOrEventListenerObject,
   options?: boolean | AddEventListenerOptions
 ) => unknown;
 
-interface EventListenerInfo<K extends string = keyof WindowEventMap> {
+interface EventListenerInfo<K extends string = keyof DocumentEventMap> {
   key: string;
   type: K;
-  listener: K extends keyof WindowEventMap
-    ? (this: Window, ev: WindowEventMap[K]) => unknown
+  listener: K extends keyof DocumentEventMap
+    ? (this: Document, ev: DocumentEventMap[K]) => unknown
     : EventListenerOrEventListenerObject;
   options?: boolean | AddEventListenerOptions;
 }
 
-export const useWindowEvent = () => {
+const useDocumentEvent = () => {
   const eventListenersRef = useRef<
-    EventListenerInfo<string | keyof WindowEventMap>[]
+    EventListenerInfo<string | keyof DocumentEventMap>[]
   >([]);
 
-  const addWindowEventListener: EventListnerProps = (
+  const addDocumentEventListener: EventListnerProps = (
     key,
     type,
     listener,
     options
   ) => {
     console.log("addEvent");
-    window.addEventListener(type, listener, options);
+    document.addEventListener(type, listener, options);
     eventListenersRef.current = [
       ...eventListenersRef.current,
       { key, type, listener, options },
     ];
   };
 
-  const removeWindowEventListener = (key: string) => {
+  const removeDocumentEventListener = (key: string) => {
     eventListenersRef.current.forEach((eventListener) => {
       if (eventListener.key === key) {
         const { type, listener, options } = eventListener;
-        window.removeEventListener(type, listener, options);
+        document.removeEventListener(type, listener, options);
       }
     });
     eventListenersRef.current = eventListenersRef.current.filter(
@@ -50,9 +50,9 @@ export const useWindowEvent = () => {
   };
 
   return {
-    addWindowEventListener,
-    removeWindowEventListener,
+    addDocumentEventListener,
+    removeDocumentEventListener,
   };
 };
 
-export default useWindowEvent;
+export default useDocumentEvent;
