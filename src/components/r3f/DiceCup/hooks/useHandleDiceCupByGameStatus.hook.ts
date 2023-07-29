@@ -1,3 +1,4 @@
+import { useWindowEvent } from "@/hooks/useWindowEvent";
 import { gameStatusState } from "@/stores/game.store";
 import { RapierRigidBody } from "@react-three/rapier";
 import { RefObject, useEffect } from "react";
@@ -8,6 +9,9 @@ const useHandleDiceCup = (
   diceCupRigidBodyRef: RefObject<RapierRigidBody | null>
 ) => {
   const gameStatus = useRecoilValue(gameStatusState);
+
+  const { addWindowEventListener, removeWindowEventListener } =
+    useWindowEvent();
 
   useEffect(() => {
     const 주사위흔들기 = () => {
@@ -50,16 +54,24 @@ const useHandleDiceCup = (
         );
       };
 
-      window.addEventListener("mousemove", handleDiceCupMove);
-
-      return () => window.removeEventListener("mousemove", handleDiceCupMove);
+      addWindowEventListener(
+        "handleDiceCupMove",
+        "mousemove",
+        handleDiceCupMove
+      );
     };
 
     switch (gameStatus) {
       case "주사위흔들기":
-        return 주사위흔들기();
+        주사위흔들기();
+        return () => removeWindowEventListener("handleDiceCupMove");
     }
-  }, [diceCupRigidBodyRef, gameStatus]);
+  }, [
+    diceCupRigidBodyRef,
+    gameStatus,
+    addWindowEventListener,
+    removeWindowEventListener,
+  ]);
 };
 
 export default useHandleDiceCup;

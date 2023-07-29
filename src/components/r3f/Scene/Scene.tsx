@@ -17,7 +17,7 @@ const Scene = () => {
 
       <Suspense>
         <Physics
-          gravity={[0, -5, 0]}
+          gravity={[0, -9, 0]}
           colliders={false}
           predictionDistance={0.09}
           debug
