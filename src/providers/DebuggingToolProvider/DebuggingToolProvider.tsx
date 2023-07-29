@@ -1,3 +1,4 @@
+import useWindowEvent from "@/hooks/useWindowEvent";
 import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
 import DebuggingTool from "./DebuggingTool/DebuggingTool";
 
@@ -18,16 +19,20 @@ const DebuggingToolProvider = ({ children }: PropTypes) => {
   const [onKeyEnterCallbacks, setOnKeyEnterCallbacks] =
     useState<onKeyEnterInfo>({});
 
+  const { addWindowEventListener, removeWindowEventListener } =
+    useWindowEvent();
+
   useEffect(() => {
     Object.entries(onKeyEnterCallbacks).map(([code, callback]) => {
-      window.addEventListener("keydown", (e: KeyboardEvent) => {
+      addWindowEventListener("handleKeyDown", "keydown", (e: KeyboardEvent) => {
         e.code === code && callback();
       });
     });
 
     if (Object.keys(onKeyEnterCallbacks).length !== 0)
       setOnKeyEnterCallbacks({});
-  }, [onKeyEnterCallbacks]);
+    () => removeWindowEventListener("handleKeyDown");
+  }, [onKeyEnterCallbacks, addWindowEventListener, removeWindowEventListener]);
 
   const actions = useMemo(
     () => ({

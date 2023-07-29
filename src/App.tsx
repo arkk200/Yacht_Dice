@@ -4,25 +4,27 @@ import { RecoilRoot } from "recoil";
 import { css, styled } from "styled-components";
 import ScoreSheet from "./components/ScoreSheet/ScoreSheet";
 import Scene from "./components/r3f/Scene/Scene";
+import useWindowEvent from "./hooks/useWindowEvent";
 import DebuggingToolProvider from "./providers/DebuggingToolProvider/DebuggingToolProvider";
 import GlobalStyle from "./styles/global.style";
 
 function App() {
   const [isAppFlattened, setIsAppFlattened] = useState(false);
 
+  const { addWindowEventListener, removeWindowEventListener } =
+    useWindowEvent();
+
   useEffect(() => {
-    const handleSizeChange = () => {
+    addWindowEventListener("handleSizeChange", "resize", () => {
       if (window.innerWidth / window.innerHeight > 1920 / 1080) {
         setIsAppFlattened(true);
       } else {
         setIsAppFlattened(false);
       }
-    };
+    });
 
-    window.addEventListener("resize", handleSizeChange);
-
-    return () => window.removeEventListener("resize", handleSizeChange);
-  }, []);
+    return () => removeWindowEventListener("handleSizeChange");
+  }, [addWindowEventListener, removeWindowEventListener]);
 
   return (
     <DebuggingToolProvider>
