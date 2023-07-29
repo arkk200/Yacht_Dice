@@ -1,5 +1,6 @@
 import useWindowEvent from "@/hooks/useWindowEvent";
-import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
+import ProviderProps from "../types/provider.types";
 import DebuggingTool from "./DebuggingTool/DebuggingTool";
 
 type onClickInfo = { [key in string]: () => void };
@@ -10,11 +11,7 @@ export const EventActionContext = createContext<{
   onKeyEnterToCall(onKeyEnterInfo: onKeyEnterInfo): void;
 } | null>(null);
 
-interface PropTypes {
-  children: ReactNode;
-}
-
-const DebuggingToolProvider = ({ children }: PropTypes) => {
+const DebuggingToolProvider = ({ children }: ProviderProps) => {
   const [onClickCallbacks, setOnClickCallbacks] = useState({});
   const [onKeyEnterCallbacks, setOnKeyEnterCallbacks] =
     useState<onKeyEnterInfo>({});
