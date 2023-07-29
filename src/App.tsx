@@ -1,4 +1,4 @@
-import "@/styles/fonts.style.css";
+import "@/styles/fonts.styles.css";
 import { useEffect, useState } from "react";
 import { RecoilRoot } from "recoil";
 import { css, styled } from "styled-components";
@@ -6,7 +6,7 @@ import ScoreSheet from "./components/ScoreSheet/ScoreSheet";
 import Scene from "./components/r3f/Scene/Scene";
 import useWindowEvent from "./hooks/useWindowEvent";
 import DebuggingToolProvider from "./providers/DebuggingToolProvider/DebuggingToolProvider";
-import GlobalStyle from "./styles/global.style";
+import GlobalStyle from "./styles/global.styles";
 
 function App() {
   const [isAppFlattened, setIsAppFlattened] = useState(false);
