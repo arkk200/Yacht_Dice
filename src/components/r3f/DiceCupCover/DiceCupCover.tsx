@@ -1,11 +1,11 @@
 import { Cylinder } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 
-interface PropTypes {
+interface Props {
   position: [number, number, number];
 }
 
-const DiceCupCover = ({ position }: PropTypes) => {
+const DiceCupCover = ({ position }: Props) => {
   return (
     <RigidBody
       colliders="trimesh"

@@ -4,11 +4,11 @@ import { DoubleSide } from "three";
 import useDiceGeometries from "./hooks/useDiceGeometries.hook";
 // import useDiceGeometries from "./Dice.hooks";
 
-interface PropTypes {
+interface Props {
   position: [number, number, number];
 }
 
-const Dice = ({ position }: PropTypes) => {
+const Dice = ({ position }: Props) => {
   const { geometry, innerGeometry } = useMemo(useDiceGeometries, []);
 
   return (

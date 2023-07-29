@@ -1,12 +1,12 @@
 import { styled } from "styled-components";
 
-interface PropTypes {
+interface Props {
   onClickCallbacks: {
     [key in string]: () => void;
   };
 }
 
-const DebuggingTool = ({ onClickCallbacks }: PropTypes) => {
+const DebuggingTool = ({ onClickCallbacks }: Props) => {
   return (
     <StyledDebuggingTool>
       {Object.entries(onClickCallbacks).map(([name, onClick], index) => (

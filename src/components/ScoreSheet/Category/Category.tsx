@@ -14,7 +14,7 @@ type NameTypes =
   | "L. Straight"
   | "Yacht";
 
-interface PropTypes {
+interface Props {
   name: NameTypes;
 }
 
@@ -27,7 +27,7 @@ const specials = [
   "Yacht",
 ] as const;
 
-const Category = ({ name }: PropTypes) => {
+const Category = ({ name }: Props) => {
   return (
     <S.StyledCategory>
       <S.Name
