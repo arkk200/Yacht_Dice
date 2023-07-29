@@ -6,18 +6,20 @@ import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { useEffect, useRef, useState } from "react";
-import { Euler, Quaternion, Vector3 } from "three";
+import { Euler, Quaternion } from "three";
+import useHandleDiceCup from "./hooks/useHandleDiceCupByGameStatus.hook";
 
 const DiceCup = () => {
-  const [is기울이기, setIs기울이기] = useState(false);
-
   const gltf = useGLTF("/diceCup.glb");
 
   useCastShadow(gltf.scene);
   useReceiveShadow(gltf.scene);
 
-  const { onClickToCall, onKeyEnterToCall } = useEventAction();
   const rigidBodyRef = useRef<RapierRigidBody>(null);
+
+  useHandleDiceCup(rigidBodyRef);
+
+  const [is기울이기, setIs기울이기] = useState(false);
 
   const x = useRef(0);
   const targetRotation = (Math.PI / 180) * 120;
@@ -39,6 +41,8 @@ const DiceCup = () => {
     }
   });
 
+  const { onClickToCall } = useEventAction();
+
   useEffect(() => {
     onClickToCall({
       주사위굴리기() {
@@ -47,36 +51,38 @@ const DiceCup = () => {
     });
   }, [onClickToCall]);
 
-  useEffect(() => {
-    let center: { x: number; y: number } | null = null;
+  // useEffect(() => {
+  //   let center: { x: number; y: number } | null = null;
 
-    const sensityDivideNumber = 1000;
-    const limitPosition = 0.15;
-    let x: number = 0,
-      y: number = 0;
+  //   const sensityDivideNumber = 1000;
+  //   const limitPosition = 0.15;
+  //   let x: number = 0,
+  //     y: number = 0;
 
-    const handleDiceCupMove = (e: MouseEvent) => {
-      const rigidBody = rigidBodyRef.current;
-      if (!rigidBody) return;
+  //   const handleDiceCupMove = (e: MouseEvent) => {
+  //     const rigidBody = rigidBodyRef.current;
+  //     if (!rigidBody) return;
 
-      if (!center) center = { x: e.clientX, y: e.clientY };
+  //     if (!center) center = { x: e.clientX, y: e.clientY };
 
-      x = (e.clientX - center.x) / sensityDivideNumber;
-      y = (e.clientY - center.y) / sensityDivideNumber;
+  //     x = (e.clientX - center.x) / sensityDivideNumber;
+  //     y = (e.clientY - center.y) / sensityDivideNumber;
 
-      if (Math.abs(x) > limitPosition) x = Math.sign(x) * limitPosition;
-      if (Math.abs(y) > limitPosition) y = Math.sign(y) * limitPosition;
+  //     if (Math.abs(x) > limitPosition) x = Math.sign(x) * limitPosition;
+  //     if (Math.abs(y) > limitPosition) y = Math.sign(y) * limitPosition;
 
-      rigidBody.setNextKinematicTranslation(new Vector3(1.75 + x, 1.5, y));
-    };
+  //     rigidBody.setNextKinematicTranslation(
+  //       new Vector3(1.75 + x, 1.5 + Math.sin(x + y), y)
+  //     );
+  //   };
 
-    onKeyEnterToCall({
-      Space() {
-        window.addEventListener("mousemove", handleDiceCupMove);
-        console.log("스페이스바 입력");
-      },
-    });
-  }, [onKeyEnterToCall]);
+  //   onKeyEnterToCall({
+  //     Space() {
+  //       window.addEventListener("mousemove", handleDiceCupMove);
+  //       console.log("스페이스바 입력");
+  //     },
+  //   });
+  // }, [onKeyEnterToCall]);
 
   return (
     <RigidBody

@@ -1,7 +1,8 @@
 import { RigidBody } from "@react-three/rapier";
 import { useMemo } from "react";
 import { DoubleSide } from "three";
-import useDiceGeometries from "./Dice.hooks";
+import useDiceGeometries from "./hooks/useDiceGeometries.hook";
+// import useDiceGeometries from "./Dice.hooks";
 
 interface PropTypes {
   position: [number, number, number];
@@ -16,6 +17,7 @@ const Dice = ({ position }: PropTypes) => {
       restitution={0.75}
       friction={0.1}
       position={position}
+      mass={100}
       ccd
     >
       <group>

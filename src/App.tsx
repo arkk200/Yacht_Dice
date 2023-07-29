@@ -1,5 +1,6 @@
 import "@/styles/fonts.style.css";
 import { useEffect, useState } from "react";
+import { RecoilRoot } from "recoil";
 import { css, styled } from "styled-components";
 import ScoreSheet from "./components/ScoreSheet/ScoreSheet";
 import Scene from "./components/r3f/Scene/Scene";
@@ -25,11 +26,13 @@ function App() {
 
   return (
     <DebuggingToolProvider>
-      <GlobalStyle />
-      <StyledApp $isAppFlattened={isAppFlattened}>
-        <ScoreSheet />
-        <Scene />
-      </StyledApp>
+      <RecoilRoot>
+        <GlobalStyle />
+        <StyledApp $isAppFlattened={isAppFlattened}>
+          <ScoreSheet />
+          <Scene />
+        </StyledApp>
+      </RecoilRoot>
     </DebuggingToolProvider>
   );
 }
