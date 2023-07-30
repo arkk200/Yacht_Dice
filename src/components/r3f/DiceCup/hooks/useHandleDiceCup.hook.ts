@@ -2,9 +2,10 @@ import { useDocumentEventListener } from "@/providers/DocumentEventListenerProvi
 import { useWindowEventListener } from "@/providers/WindowEventListenerProvider/WindowEventListenerProvider.hooks";
 import { gameStatusState } from "@/stores/game.store";
 import { RapierRigidBody } from "@react-three/rapier";
+import gsap from "gsap";
 import { RefObject, useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { Vector3 } from "three";
+import { Euler, Quaternion, Vector3 } from "three";
 
 const useHandleDiceCup = (
   diceCupRigidBodyRef: RefObject<RapierRigidBody | null>
@@ -72,6 +73,21 @@ const useHandleDiceCup = (
       });
     };
 
+    const 주사위굴리기 = () => {
+      const curEuler = new Euler(0, 0, 0);
+
+      const tl = gsap.timeline({
+        onUpdate: () => {
+          if (!diceCupRigidBodyRef.current) return;
+          diceCupRigidBodyRef.current.setNextKinematicRotation(
+            new Quaternion().setFromEuler(curEuler)
+          );
+        },
+      });
+
+      tl.to(curEuler, { duration: 1, z: (Math.PI / 180) * 120 });
+    };
+
     switch (gameStatus) {
       case "주사위흔들기":
         주사위흔들기();
@@ -80,6 +96,8 @@ const useHandleDiceCup = (
           removeDocumentEventListener("handleMouseLeave");
           removeWindowEventListener("handleBlur");
         };
+      case "주사위굴리기":
+        주사위굴리기();
     }
   }, [
     diceCupRigidBodyRef,

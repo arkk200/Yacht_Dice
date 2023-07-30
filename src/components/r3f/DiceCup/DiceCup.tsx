@@ -16,38 +16,6 @@ const DiceCup = () => {
 
   useHandleDiceCup(rigidBodyRef);
 
-  // const [is기울이기, setIs기울이기] = useState(false);
-
-  // const x = useRef(0);
-  // const targetRotation = (Math.PI / 180) * 120;
-
-  // useFrame(() => {
-  //   const rigidBody = rigidBodyRef.current;
-  //   if (is기울이기 && rigidBody && x.current !== undefined) {
-  //     x.current += 2;
-
-  //     if (x.current > 60) {
-  //       x.current = 60;
-  //     }
-
-  //     rigidBody.setNextKinematicRotation(
-  //       new Quaternion().setFromEuler(
-  //         new Euler(0, 0, easeInOutQuad(x.current / 60) * targetRotation)
-  //       )
-  //     );
-  //   }
-  // });
-
-  // const { onClickToCall } = useEventAction();
-
-  // useEffect(() => {
-  //   onClickToCall({
-  //     주사위굴리기() {
-  //       setIs기울이기(true);
-  //     },
-  //   });
-  // }, [onClickToCall]);
-
   return (
     <group>
       <RigidBody
