@@ -1,16 +1,8 @@
-import {
-  DicesNumber,
-  DicesSlept,
-  dicesNumberState,
-  dicesSleptState,
-  gameStatusState,
-} from "@/stores/game.store";
 import { RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { useMemo, useRef } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
 import { DoubleSide } from "three";
 import useDiceGeometries from "./hooks/useDiceGeometries.hook";
-import useGetDiceNumber from "./hooks/useGetDiceNumber";
+import useHandleDice from "./hooks/useHandleDice.hook";
 
 interface Props {
   id: number;
@@ -20,31 +12,9 @@ interface Props {
 const Dice = ({ id, position }: Props) => {
   const rigidBodyRef = useRef<RapierRigidBody>(null);
 
-  const gameStatus = useRecoilValue(gameStatusState);
-  const setDicesSlept = useSetRecoilState(dicesSleptState);
-  const setDicesNumber = useSetRecoilState(dicesNumberState);
-
   const { geometry, innerGeometry } = useMemo(useDiceGeometries, []);
 
-  const { getDiceNumber } = useGetDiceNumber(rigidBodyRef);
-
-  const handleDiceSlept = () => {
-    if (gameStatus === "주사위굴리기") {
-      rigidBodyRef.current?.sleep();
-      setDicesSlept(
-        (prev) =>
-          [...prev.slice(0, id), true, ...prev.slice(id + 1)] as DicesSlept
-      );
-      setDicesNumber(
-        (prev) =>
-          [
-            ...prev.slice(0, id),
-            getDiceNumber(),
-            ...prev.slice(id + 1),
-          ] as DicesNumber
-      );
-    }
-  };
+  const { handleDiceSlept } = useHandleDice(rigidBodyRef, id);
 
   return (
     <RigidBody

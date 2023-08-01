@@ -41,3 +41,24 @@ export const dicesNumberState = atom<DicesNumber>({
   key: "dicesNumberState",
   default: [null, null, null, null, null],
 });
+
+export const dicesOrderState = selector({
+  key: "dicesOrderState",
+  get: ({ get }) => {
+    const dicesNumber = get(dicesNumberState);
+    const isAllDicesSlept = get(isAllDicesSleptState);
+    if (!isAllDicesSlept) return;
+
+    const sortedDicesNumber = [...dicesNumber].sort((a, b) => a! - b!);
+
+    const sortedIndexes = sortedDicesNumber.map((pivotDiceNumber) => {
+      const index = dicesNumber.findIndex(
+        (diceNumber) => pivotDiceNumber === diceNumber
+      );
+      dicesNumber[index] = null;
+      return index;
+    });
+
+    return sortedIndexes;
+  },
+});
