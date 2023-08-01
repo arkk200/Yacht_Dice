@@ -7,8 +7,6 @@ const getCalculatedDiceNumber = (x: number, y: number, z: number): number => {
   const isPiOrMinusPi = (angle: number) =>
     Math.abs(Math.PI - angle) < eps || Math.abs(Math.PI + angle) < eps;
 
-  console.log(x.toFixed(4), y.toFixed(4), z.toFixed(4));
-
   if ((isZero(z) && isZero(x)) || (isPiOrMinusPi(z) && isPiOrMinusPi(x)))
     return 1;
   if ((isZero(x) && isHalfPi(z)) || (isPiOrMinusPi(x) && isMinusHalfPi(z)))

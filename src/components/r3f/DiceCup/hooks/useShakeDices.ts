@@ -17,7 +17,7 @@ const useShakeDices = (diceCupRigidBodyRef: RefObject<RapierRigidBody>) => {
     let y: number = 0;
 
     const handleTransformedPosition = (e: MouseEvent) => {
-      if (!center) center = { x: e.clientX, y: e.clientY };
+      if (!center) center = { x: e.clientX - x, y: e.clientY - y };
 
       x = e.clientX - center.x;
       y = e.clientY - center.y;
@@ -55,13 +55,12 @@ const useShakeDices = (diceCupRigidBodyRef: RefObject<RapierRigidBody>) => {
       }
     );
 
-    addDocumentEventListener("handleMouseLeave", "mouseenter", (e) => {
-      center = {
-        x: e.clientX - x,
-        y: e.clientY - y,
-      };
+    addDocumentEventListener("handleMouseLeave", "mouseenter", () => {
+      center = null;
     });
-    addWindowEventListener("handleBlur", "focus", () => {});
+    addWindowEventListener("handleBlur", "focus", () => {
+      center = null;
+    });
   };
 
   const removeShakeDicesEvents = () => {

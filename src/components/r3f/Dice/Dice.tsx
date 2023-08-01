@@ -1,11 +1,14 @@
-import { diceSleptState, gameStatusState } from "@/stores/game.store";
+import {
+  DiceSlept,
+  diceSleptState,
+  gameStatusState,
+} from "@/stores/game.store";
 import { RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { useMemo, useRef } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { DoubleSide } from "three";
 import useDiceGeometries from "./hooks/useDiceGeometries.hook";
 import useGetDiceNumber from "./hooks/useGetDiceNumber";
-// import useDiceGeometries from "./Dice.hooks";
 
 interface Props {
   id: number;
@@ -25,7 +28,10 @@ const Dice = ({ id, position }: Props) => {
   const handleDiceSlept = () => {
     if (gameStatus === "주사위굴리기") {
       rigidBodyRef.current?.sleep();
-      setDiceSlept((prev) => ({ ...prev, [id]: true }));
+      setDiceSlept(
+        (prev) =>
+          [...prev.slice(0, id), true, ...prev.slice(id + 1)] as DiceSlept
+      );
       console.log(id, getDiceNumber());
     }
   };
