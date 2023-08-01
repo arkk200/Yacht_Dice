@@ -4,7 +4,15 @@ export type GameStatus = "주사위흔들기" | "주사위굴리기" | "선택�
 
 export type Turn = "P1" | "P2";
 
-export type DiceSlept = [boolean, boolean, boolean, boolean, boolean];
+export type DicesSlept = [boolean, boolean, boolean, boolean, boolean];
+
+export type DicesNumber = [
+  number | null,
+  number | null,
+  number | null,
+  number | null,
+  number | null
+];
 
 export const gameStatusState = atom<GameStatus>({
   key: "gameStatus",
@@ -16,7 +24,7 @@ export const turnState = atom<Turn>({
   default: "P1",
 });
 
-export const diceSleptState = atom<DiceSlept>({
+export const dicesSleptState = atom<DicesSlept>({
   key: "diceSlept",
   default: [false, false, false, false, false],
 });
@@ -24,7 +32,12 @@ export const diceSleptState = atom<DiceSlept>({
 export const isAllDicesSleptState = selector({
   key: "isAllDicesSlept",
   get: ({ get }) => {
-    const diceSlept = get(diceSleptState);
+    const diceSlept = get(dicesSleptState);
     return diceSlept.every((slept) => slept);
   },
+});
+
+export const dicesNumberState = atom<DicesNumber>({
+  key: "dicesNumberState",
+  default: [null, null, null, null, null],
 });

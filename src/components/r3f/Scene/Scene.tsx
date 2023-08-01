@@ -1,43 +1,38 @@
 import { useWindowEventListener } from "@/providers/WindowEventListenerProvider/WindowEventListenerProvider.hooks";
-import { gameStatusState, isAllDicesSleptState } from "@/stores/game.store";
+import { gameStatusState } from "@/stores/game.store";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import { Suspense, useEffect } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import DiceCup from "../DiceCup/DiceCup";
 import DiceTray from "../DiceTray/DiceTray";
 import Dices from "../Dices/Dices";
 
-const n = 0;
-
 const Scene = () => {
-  const setGameStatus = useSetRecoilState(gameStatusState);
-  const isAllDicesSlept = useRecoilValue(isAllDicesSleptState);
+  const [gameStatus, setGameStatus] = useRecoilState(gameStatusState);
 
   const { addWindowEventListener, removeWindowEventListener } =
     useWindowEventListener();
 
   useEffect(() => {
     addWindowEventListener("handleGameStatusChange", "click", () => {
-      setGameStatus((prev) => {
-        switch (prev) {
-          case "주사위흔들기":
-            return "주사위굴리기";
-          default:
-            return "주사위흔들기";
-        }
-      });
+      switch (gameStatus) {
+        case "주사위흔들기":
+          setGameStatus("주사위굴리기");
+          break;
+      }
     });
 
     return () => removeWindowEventListener("handleGameStatusChange");
-  }, [setGameStatus, addWindowEventListener, removeWindowEventListener]);
-
-  useEffect(() => {
-    if (isAllDicesSlept) console.log("All dices slept!");
-  }, [isAllDicesSlept]);
+  }, [
+    gameStatus,
+    setGameStatus,
+    addWindowEventListener,
+    removeWindowEventListener,
+  ]);
 
   return (
-    <Canvas camera={{ position: n ? [0, 0, 15] : [0, 15, 0], fov: 20 }} shadows>
+    <Canvas camera={{ position: [0, 15, 0], fov: 20 }} shadows>
       {/* <OrbitControls /> */}
       <ambientLight intensity={1} />
       <directionalLight position={[3, 25, -3]} castShadow />
