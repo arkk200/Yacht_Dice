@@ -1,4 +1,4 @@
-import { RapierRigidBody, euler, quat } from "@react-three/rapier";
+import { RapierRigidBody } from "@react-three/rapier";
 import { gsap } from "gsap";
 import { RefObject } from "react";
 import { Vector3 } from "three";
@@ -9,16 +9,16 @@ const useRollDices = (diceCupRigidBodyRef: RefObject<RapierRigidBody>) => {
     const diceCupRigidBody = diceCupRigidBodyRef.current;
     if (!diceCupRigidBody) return;
 
-    const curEuler = euler(diceCupRigidBody.rotation());
+    const curRotation = diceCupRigidBody.rotation();
     const curPosition = firstPosition;
 
     const tl = gsap.timeline();
 
-    tl.to(curEuler, {
+    tl.to(curRotation, {
       duration: 1,
       z: (Math.PI / 180) * 120,
       onUpdate() {
-        diceCupRigidBody.setRotation(quat().setFromEuler(curEuler), true);
+        diceCupRigidBody.setRotation(curRotation, true);
       },
     }).to(curPosition, {
       delay: 0.9,
