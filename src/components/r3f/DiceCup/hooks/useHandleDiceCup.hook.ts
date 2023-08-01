@@ -5,9 +5,7 @@ import { useRecoilValue } from "recoil";
 import useRollDices from "./useRollDices";
 import useShakeDices from "./useShakeDices";
 
-const useHandleDiceCup = (
-  diceCupRigidBodyRef: RefObject<RapierRigidBody | null>
-) => {
+const useHandleDiceCup = (diceCupRigidBodyRef: RefObject<RapierRigidBody>) => {
   const gameStatus = useRecoilValue(gameStatusState);
 
   const { shakeDices, removeShakeDicesEvents } =

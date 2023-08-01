@@ -2,7 +2,6 @@ import { BoxGeometry, PlaneGeometry, Vector3 } from "three";
 import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
 
 const params = {
-  numberOfDice: 1,
   segments: 40,
   edgeRadius: 0.07,
   notchRadius: 0.09,
@@ -75,7 +74,6 @@ const getDiceGeometry = () => {
 
     const offset = 0.125;
 
-    // console.log(position);
     if (position.y === 0.25) {
       position.y -= notch([position.x, position.z]);
     } else if (position.x === 0.25) {

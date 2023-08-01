@@ -1,23 +1,45 @@
-import { RigidBody } from "@react-three/rapier";
-import { useMemo } from "react";
+import { diceSleptState, gameStatusState } from "@/stores/game.store";
+import { RapierRigidBody, RigidBody } from "@react-three/rapier";
+import { useMemo, useRef } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { DoubleSide } from "three";
 import useDiceGeometries from "./hooks/useDiceGeometries.hook";
+import useGetDiceNumber from "./hooks/useGetDiceNumber";
 // import useDiceGeometries from "./Dice.hooks";
 
 interface Props {
+  id: number;
   position: [number, number, number];
 }
 
-const Dice = ({ position }: Props) => {
+const Dice = ({ id, position }: Props) => {
+  const rigidBodyRef = useRef<RapierRigidBody>(null);
+
+  const setDiceSlept = useSetRecoilState(diceSleptState);
+  const gameStatus = useRecoilValue(gameStatusState);
+
   const { geometry, innerGeometry } = useMemo(useDiceGeometries, []);
+
+  const { getDiceNumber } = useGetDiceNumber(rigidBodyRef);
+
+  const handleDiceSlept = () => {
+    if (gameStatus === "주사위굴리기") {
+      rigidBodyRef.current?.sleep();
+      setDiceSlept((prev) => ({ ...prev, [id]: true }));
+      console.log(id, getDiceNumber());
+    }
+  };
 
   return (
     <RigidBody
+      ref={rigidBodyRef}
       colliders="cuboid"
       restitution={0.75}
       friction={0.1}
       position={position}
+      scale={1}
       mass={100}
+      onSleep={handleDiceSlept}
       ccd
     >
       <group>

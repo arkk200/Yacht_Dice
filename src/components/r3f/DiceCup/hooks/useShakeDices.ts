@@ -4,9 +4,7 @@ import { RapierRigidBody } from "@react-three/rapier";
 import { RefObject } from "react";
 import { Vector3 } from "three";
 
-const useShakeDices = (
-  diceCupRigidBodyRef: RefObject<RapierRigidBody | null>
-) => {
+const useShakeDices = (diceCupRigidBodyRef: RefObject<RapierRigidBody>) => {
   const { addWindowEventListener, removeWindowEventListener } =
     useWindowEventListener();
   const { addDocumentEventListener, removeDocumentEventListener } =
@@ -57,13 +55,13 @@ const useShakeDices = (
       }
     );
 
-    addDocumentEventListener("handleMouseLeave", "mouseleave", () => {
-      center = null;
+    addDocumentEventListener("handleMouseLeave", "mouseenter", (e) => {
+      center = {
+        x: e.clientX - x,
+        y: e.clientY - y,
+      };
     });
-    addWindowEventListener("handleBlur", "blur", () => {
-      center = null;
-      console.log("blur");
-    });
+    addWindowEventListener("handleBlur", "focus", () => {});
   };
 
   const removeShakeDicesEvents = () => {

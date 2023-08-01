@@ -1,10 +1,9 @@
 import { useWindowEventListener } from "@/providers/WindowEventListenerProvider/WindowEventListenerProvider.hooks";
-import { gameStatusState } from "@/stores/game.store";
-import { OrbitControls, OrthographicCamera } from "@react-three/drei";
+import { gameStatusState, isAllDicesSleptState } from "@/stores/game.store";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import { Suspense, useEffect } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import DiceCup from "../DiceCup/DiceCup";
 import DiceTray from "../DiceTray/DiceTray";
 import Dices from "../Dices/Dices";
@@ -13,6 +12,8 @@ const n = 0;
 
 const Scene = () => {
   const setGameStatus = useSetRecoilState(gameStatusState);
+  const isAllDicesSlept = useRecoilValue(isAllDicesSleptState);
+
   const { addWindowEventListener, removeWindowEventListener } =
     useWindowEventListener();
 
@@ -30,18 +31,23 @@ const Scene = () => {
 
     return () => removeWindowEventListener("handleGameStatusChange");
   }, [setGameStatus, addWindowEventListener, removeWindowEventListener]);
+
+  useEffect(() => {
+    if (isAllDicesSlept) console.log("All dices slept!");
+  }, [isAllDicesSlept]);
+
   return (
-    <Canvas camera={{ position: n ? [0, 0, 15] : [0, 20, 0], fov: 20 }} shadows>
-      <OrbitControls />
+    <Canvas camera={{ position: n ? [0, 0, 15] : [0, 15, 0], fov: 20 }} shadows>
+      {/* <OrbitControls /> */}
       <ambientLight intensity={1} />
       <directionalLight position={[3, 25, -3]} castShadow />
-      <OrthographicCamera makeDefault position={[0, 7, 0]} zoom={70} />
+      {/* <OrthographicCamera makeDefault position={[0, 7, 0]} zoom={70} /> */}
 
       <Suspense>
         <Physics
           gravity={[0, -12, 0]}
           colliders={false}
-          predictionDistance={0.09}
+          predictionDistance={0.1}
           debug
         >
           <Dices />

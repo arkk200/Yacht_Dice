@@ -4,6 +4,7 @@ import { useGLTF } from "@react-three/drei";
 import { RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { useRef } from "react";
 import DiceCupCover from "../DiceCupCover/DiceCupCover";
+import { firstPosition } from "./constants/diceCup.constant";
 import useHandleDiceCup from "./hooks/useHandleDiceCup.hook";
 
 const DiceCup = () => {
@@ -16,13 +17,15 @@ const DiceCup = () => {
 
   useHandleDiceCup(rigidBodyRef);
 
+  const { x, y, z } = firstPosition;
+
   return (
     <group>
       <RigidBody
         ref={rigidBodyRef}
         colliders="trimesh"
         type="kinematicPosition"
-        position={[1.75, 1.5, 0]}
+        position={[x, y, z]}
         ccd
       >
         <primitive position={[-0.75, -0.5, 0]} object={gltf.scene} />
