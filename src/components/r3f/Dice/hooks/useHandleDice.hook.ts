@@ -18,7 +18,7 @@ const useHandleDice = (
   const setDicesSlept = useSetRecoilState(dicesSleptState);
   const setDicesNumber = useSetRecoilState(dicesNumberState);
 
-  const { getDiceNumber } = useGetDiceNumber(diceRigidBodyRef);
+  const { getDiceNumber } = useGetDiceNumber();
 
   const handleDiceSlept = () => {
     if (gameStatus !== "주사위굴리기") return;
@@ -30,7 +30,7 @@ const useHandleDice = (
       (prev) =>
         [
           ...prev.slice(0, id),
-          getDiceNumber(),
+          getDiceNumber(diceRigidBodyRef),
           ...prev.slice(id + 1),
         ] as DicesNumber
     );
