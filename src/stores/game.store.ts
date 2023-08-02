@@ -42,20 +42,20 @@ export const dicesNumberState = atom<DicesNumber>({
   default: [null, null, null, null, null],
 });
 
-export const dicesOrderState = selector({
+export const sortedDicesOrderState = selector({
   key: "dicesOrderState",
   get: ({ get }) => {
     const dicesNumber = get(dicesNumberState);
-    const isAllDicesSlept = get(isAllDicesSleptState);
-    if (!isAllDicesSlept) return;
+    if (dicesNumber.some((diceNumber) => diceNumber === null)) return [];
 
-    const sortedDicesNumber = [...dicesNumber].sort((a, b) => a! - b!);
+    const cloneDiceNumber = [...dicesNumber];
+    const sortedDicesNumber = [...cloneDiceNumber].sort((a, b) => a! - b!);
 
     const sortedIndexes = sortedDicesNumber.map((pivotDiceNumber) => {
-      const index = dicesNumber.findIndex(
+      const index = cloneDiceNumber.findIndex(
         (diceNumber) => pivotDiceNumber === diceNumber
       );
-      dicesNumber[index] = null;
+      cloneDiceNumber[index] = null;
       return index;
     });
 

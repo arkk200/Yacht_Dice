@@ -15,7 +15,7 @@ const useGetDiceNumber = () => {
 };
 
 const getCalculatedDiceNumber = (x: number, y: number, z: number): number => {
-  const eps = 0.1;
+  const eps = Math.PI / 4;
   const isZero = (angle: number) => Math.abs(angle) < eps;
   const isHalfPi = (angle: number) => Math.abs(angle - 0.5 * Math.PI) < eps;
   const isMinusHalfPi = (angle: number) =>
