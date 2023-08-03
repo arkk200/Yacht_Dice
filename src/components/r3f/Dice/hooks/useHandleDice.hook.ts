@@ -1,11 +1,11 @@
 import {
   DicesNumber,
   DicesSlept,
-  dicesNumberState,
-  dicesSleptState,
+  diceNumberListState,
+  diceSleepListState,
   gameStatusState,
-  isAllDicesSleptState,
-  sortedDicesOrderState,
+  isAllDicesSleepState,
+  sortedDiceOrderListState,
 } from "@/stores/game.store";
 import { RapierRigidBody } from "@react-three/rapier";
 import { gsap } from "gsap";
@@ -18,16 +18,15 @@ const useHandleDice = (
   id: number
 ) => {
   const gameStatus = useRecoilValue(gameStatusState);
-  const setDicesSlept = useSetRecoilState(dicesSleptState);
-  const setDicesNumber = useSetRecoilState(dicesNumberState);
-  const isAllDicesSlept = useRecoilValue(isAllDicesSleptState);
-  const sortedDicesOrder = useRecoilValue(sortedDicesOrderState);
+  const setDicesSlept = useSetRecoilState(diceSleepListState);
+  const setDicesNumber = useSetRecoilState(diceNumberListState);
+  const isAllDicesSlept = useRecoilValue(isAllDicesSleepState);
+  const sortedDicesOrder = useRecoilValue(sortedDiceOrderListState);
 
   const { getDiceNumber } = useGetDiceNumber();
 
   const handleDiceSlept = () => {
     if (gameStatus === "주사위굴리기") {
-      diceRigidBodyRef.current?.setEnabled(false);
       setDicesSlept(
         (prev) =>
           [...prev.slice(0, id), true, ...prev.slice(id + 1)] as DicesSlept
@@ -48,6 +47,7 @@ const useHandleDice = (
     if (!diceRigidBody) return;
 
     if (isAllDicesSlept && gameStatus === "주사위굴리기") {
+      diceRigidBody.setEnabled(false);
       const curPosition = diceRigidBody.translation();
       const curRotation = diceRigidBody.rotation();
 

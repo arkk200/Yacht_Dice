@@ -24,41 +24,43 @@ export const turnState = atom<Turn>({
   default: "P1",
 });
 
-export const dicesSleptState = atom<DicesSlept>({
+export const diceSleepListState = atom<DicesSlept>({
   key: "diceSlept",
   default: [false, false, false, false, false],
 });
 
-export const isAllDicesSleptState = selector({
+export const isAllDicesSleepState = selector({
   key: "isAllDicesSlept",
   get: ({ get }) => {
-    const diceSlept = get(dicesSleptState);
+    const diceSlept = get(diceSleepListState);
     return diceSlept.every((slept) => slept);
   },
 });
 
-export const dicesNumberState = atom<DicesNumber>({
+export const diceNumberListState = atom<DicesNumber>({
   key: "dicesNumberState",
   default: [null, null, null, null, null],
 });
 
-export const sortedDicesOrderState = selector({
+export const sortedDiceOrderListState = selector({
   key: "dicesOrderState",
   get: ({ get }) => {
-    const dicesNumber = get(dicesNumberState);
-    if (dicesNumber.some((diceNumber) => diceNumber === null)) return [];
+    const diceNumberList = get(diceNumberListState);
+    if (diceNumberList.some((diceNumber) => diceNumber === null)) return [];
 
-    const cloneDiceNumber = [...dicesNumber];
-    const sortedDicesNumber = [...cloneDiceNumber].sort((a, b) => a! - b!);
+    const cloneDiceNumberList = [...diceNumberList];
+    const sortedDiceNumberList = [...cloneDiceNumberList].sort(
+      (a, b) => a! - b!
+    );
 
-    const sortedIndexes = sortedDicesNumber.map((pivotDiceNumber) => {
-      const index = cloneDiceNumber.findIndex(
+    const sortedIndexList = sortedDiceNumberList.map((pivotDiceNumber) => {
+      const index = cloneDiceNumberList.findIndex(
         (diceNumber) => pivotDiceNumber === diceNumber
       );
-      cloneDiceNumber[index] = null;
+      cloneDiceNumberList[index] = null;
       return index;
     });
 
-    return sortedIndexes;
+    return sortedIndexList;
   },
 });
