@@ -7,8 +7,7 @@ const useGetDiceNumber = () => {
       quat(diceRigidRef.current?.rotation())
     );
 
-    const diceNumber = getCalculatedDiceNumber(angle.x, angle.y, angle.z);
-    return diceNumber;
+    return getCalculatedDiceNumber(angle.x, angle.y, angle.z);
   };
 
   return { getDiceNumber };
@@ -16,22 +15,37 @@ const useGetDiceNumber = () => {
 
 const getCalculatedDiceNumber = (x: number, y: number, z: number): number => {
   const eps = Math.PI / 4;
-  const isZero = (angle: number) => Math.abs(angle) < eps;
-  const isHalfPi = (angle: number) => Math.abs(angle - 0.5 * Math.PI) < eps;
-  const isMinusHalfPi = (angle: number) =>
+  const closesZero = (angle: number) => Math.abs(angle) < eps;
+  const closesHalfPi = (angle: number) => Math.abs(angle - 0.5 * Math.PI) < eps;
+  const closesMinusHalfPi = (angle: number) =>
     Math.abs(0.5 * Math.PI + angle) < eps;
-  const isPiOrMinusPi = (angle: number) =>
+  const closesPiOrMinusPi = (angle: number) =>
     Math.abs(Math.PI - angle) < eps || Math.abs(Math.PI + angle) < eps;
 
-  if ((isZero(z) && isZero(x)) || (isPiOrMinusPi(z) && isPiOrMinusPi(x)))
+  if (
+    (closesZero(z) && closesZero(x)) ||
+    (closesPiOrMinusPi(z) && closesPiOrMinusPi(x))
+  )
     return 1;
-  if ((isZero(x) && isHalfPi(z)) || (isPiOrMinusPi(x) && isMinusHalfPi(z)))
+  if (
+    (closesZero(x) && closesHalfPi(z)) ||
+    (closesPiOrMinusPi(x) && closesMinusHalfPi(z))
+  )
     return 2;
-  if ((isMinusHalfPi(x) && isZero(y)) || (isHalfPi(x) && isPiOrMinusPi(y)))
+  if (
+    (closesMinusHalfPi(x) && closesZero(y)) ||
+    (closesHalfPi(x) && closesPiOrMinusPi(y))
+  )
     return 3;
-  if ((isHalfPi(x) && isZero(y)) || (isMinusHalfPi(x) && isPiOrMinusPi(y)))
+  if (
+    (closesHalfPi(x) && closesZero(y)) ||
+    (closesMinusHalfPi(x) && closesPiOrMinusPi(y))
+  )
     return 4;
-  if ((isZero(x) && isMinusHalfPi(z)) || (isPiOrMinusPi(x) && isHalfPi(z)))
+  if (
+    (closesZero(x) && closesMinusHalfPi(z)) ||
+    (closesPiOrMinusPi(x) && closesHalfPi(z))
+  )
     return 5;
   return 6;
 };
