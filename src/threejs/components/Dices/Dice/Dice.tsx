@@ -1,11 +1,12 @@
 import { RapierRigidBody, RigidBody } from "@react-three/rapier";
-import { useMemo, useRef } from "react";
+import { Dispatch, SetStateAction, useMemo, useRef } from "react";
 import { DoubleSide } from "three";
 import useDiceGeometries from "./hooks/useDiceGeometries.hook";
 
 interface Props {
   id: number;
   position: [number, number, number];
+  setIsSleepList: Dispatch<SetStateAction<boolean[]>>;
 }
 
 const Dice = ({ position }: Props) => {
