@@ -64,7 +64,6 @@ const useHandleDice = (
         delay: 0.05 * order,
         duration: 0.25,
         onUpdate() {
-          console.log(diceRigidBody.bodyType());
           diceRigidBody.setTranslation(curPosition, true);
         },
       });

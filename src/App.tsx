@@ -3,26 +3,23 @@ import { useEffect, useState } from "react";
 import { css, styled } from "styled-components";
 import ScoreSheet from "./components/ScoreSheet/ScoreSheet";
 import Scene from "./components/r3f/Scene/Scene";
-import { useWindowEventListener } from "./providers/WindowEventListenerProvider/WindowEventListenerProvider.hooks";
 import GlobalStyle from "./styles/global.styles";
 
 function App() {
   const [isAppFlattened, setIsAppFlattened] = useState(false);
 
-  const { addWindowEventListener, removeWindowEventListener } =
-    useWindowEventListener();
-
   useEffect(() => {
-    addWindowEventListener("handleSizeChange", "resize", () => {
+    const onResizeWindow = () => {
       if (window.innerWidth / window.innerHeight > 1920 / 1080) {
         setIsAppFlattened(true);
       } else {
         setIsAppFlattened(false);
       }
-    });
+    };
+    window.addEventListener("resize", onResizeWindow);
 
-    return () => removeWindowEventListener("handleSizeChange");
-  }, [addWindowEventListener, removeWindowEventListener]);
+    return () => window.removeEventListener("resize", onResizeWindow);
+  }, []);
 
   return (
     <>
