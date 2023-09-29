@@ -1,4 +1,4 @@
-import useReceiveShadow from "@/hooks/useReceiveShadow";
+import useReceiveShadow from "@/threejs/hooks/useReceiveShadow";
 import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 

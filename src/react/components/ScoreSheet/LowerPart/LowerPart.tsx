@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import Category from "../Category/Category";
+import Category from "../common/Category/Category";
 import Total from "./Total/Total";
 
 const LowerPart = () => {

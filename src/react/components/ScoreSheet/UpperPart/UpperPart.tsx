@@ -1,4 +1,4 @@
-import Category from "../Category/Category";
+import Category from "../common/Category/Category";
 import Header from "./Header/Header";
 import SubTotal from "./SubTotal/SubTotal";
 

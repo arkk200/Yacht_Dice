@@ -1,5 +1,5 @@
-import useCastShadow from "@/hooks/useCastShadow";
-import useReceiveShadow from "@/hooks/useReceiveShadow";
+import useCastShadow from "@/threejs/hooks/useCastShadow";
+import useReceiveShadow from "@/threejs/hooks/useReceiveShadow";
 import { useGLTF } from "@react-three/drei";
 import { RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { useRef } from "react";

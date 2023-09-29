@@ -1,9 +1,9 @@
 import "@/styles/fonts.styles.css";
 import { useEffect, useState } from "react";
 import { css, styled } from "styled-components";
-import ScoreSheet from "./components/ScoreSheet/ScoreSheet";
-import Scene from "./components/r3f/Scene/Scene";
+import ScoreSheet from "./react/components/ScoreSheet/ScoreSheet";
 import GlobalStyle from "./styles/global.styles";
+import Scene from "./threejs/components/Scene/Scene";
 
 function App() {
   const [isAppFlattened, setIsAppFlattened] = useState(false);
