@@ -5,7 +5,6 @@ import { RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { useRef } from "react";
 import DiceCupCover from "../DiceCupCover/DiceCupCover";
 import { firstPosition } from "./constants/diceCup.constant";
-import useHandleDiceCup from "./hooks/useHandleDiceCup.hook";
 
 const DiceCup = () => {
   const gltf = useGLTF("/diceCup.glb");
@@ -14,8 +13,6 @@ const DiceCup = () => {
   useReceiveShadow(gltf.scene);
 
   const rigidBodyRef = useRef<RapierRigidBody>(null);
-
-  useHandleDiceCup(rigidBodyRef);
 
   const { x, y, z } = firstPosition;
 

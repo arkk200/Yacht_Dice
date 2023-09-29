@@ -2,19 +2,16 @@ import { RapierRigidBody, RigidBody } from "@react-three/rapier";
 import { useMemo, useRef } from "react";
 import { DoubleSide } from "three";
 import useDiceGeometries from "./hooks/useDiceGeometries.hook";
-import useHandleDice from "./hooks/useHandleDice.hook";
 
 interface Props {
   id: number;
   position: [number, number, number];
 }
 
-const Dice = ({ id, position }: Props) => {
+const Dice = ({ position }: Props) => {
   const rigidBodyRef = useRef<RapierRigidBody>(null);
 
   const { geometry, innerGeometry } = useMemo(useDiceGeometries, []);
-
-  const { handleDiceSlept } = useHandleDice(rigidBodyRef, id);
 
   return (
     <RigidBody
@@ -25,7 +22,6 @@ const Dice = ({ id, position }: Props) => {
       position={position}
       scale={1}
       mass={100}
-      onSleep={handleDiceSlept}
       ccd
     >
       <group>
