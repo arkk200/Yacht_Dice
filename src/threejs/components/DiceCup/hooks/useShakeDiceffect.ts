@@ -1,40 +1,50 @@
 import { statusAtom } from "@/store/status";
 import { RapierRigidBody } from "@react-three/rapier";
 import gsap from "gsap";
-import { RefObject, useEffect } from "react";
+import { RefObject, useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { Vector3 } from "three";
 
 const useShakeDiceEffect = (rigidBodyRef: RefObject<RapierRigidBody>) => {
+  const isShaking = useRef<boolean>(false);
   const [status, setStatus] = useRecoilState(statusAtom);
-
   useEffect(() => {
-    if (status === "주사위 굴리기") {
-      const rigidBody = rigidBodyRef.current;
+    const position = { x: 1.75, y: 1.5, z: 0 };
+    let tl: ReturnType<GSAP["timeline"]> | null = null;
 
-      if (!rigidBody) return;
-
-      const curRotation = rigidBody.rotation();
-      const curPosition = rigidBody.translation();
-
-      const tl = gsap.timeline();
-
-      tl.to(curRotation, {
-        duration: 1,
-        z: (Math.PI / 180) * 120,
+    const onKeydown = (e: KeyboardEvent) => {
+      if (e.code !== "KeyD") return;
+      if (tl) return;
+      tl = gsap.timeline();
+      tl.to(position, {
+        x: "random(1.65, 1.85, 0.05)",
+        y: "random(1.45, 1.55, 0.05)",
+        z: "random(-0.1, 0.1, 0.05)",
+        duration: 0.08,
+        repeat: -1,
+        repeatRefresh: true,
         onUpdate() {
-          rigidBody.setRotation(curRotation, true);
-        },
-      }).to(curPosition, {
-        delay: 0.9,
-        duration: 0.6,
-        x: 4,
-        z: 0,
-        onUpdate() {
-          const { x, y, z } = curPosition;
-          rigidBody.setTranslation(new Vector3(x, y, z), true);
+          rigidBodyRef.current?.setNextKinematicTranslation(
+            new Vector3(position.x, position.y, position.z)
+          );
         },
       });
+    };
+
+    const onKeyup = (e: KeyboardEvent) => {
+      if (e.code !== "KeyD") return;
+      isShaking.current = false;
+
+      tl?.pause();
+      tl = null;
+      setStatus("주사위 굴리기");
+      window.removeEventListener("keydown", onKeydown);
+      window.removeEventListener("keyup", onKeyup);
+    };
+
+    if (status === "주사위 섞기") {
+      window.addEventListener("keydown", onKeydown);
+      window.addEventListener("keyup", onKeyup);
     }
   }, [rigidBodyRef, status, setStatus]);
 };

@@ -9,7 +9,7 @@ interface Props {
   setIsSleepList: Dispatch<SetStateAction<boolean[]>>;
 }
 
-const Dice = ({ position }: Props) => {
+const Dice = ({ id, position, setIsSleepList }: Props) => {
   const rigidBodyRef = useRef<RapierRigidBody>(null);
 
   const { geometry, innerGeometry } = useMemo(useDiceGeometries, []);
@@ -23,6 +23,13 @@ const Dice = ({ position }: Props) => {
       position={position}
       scale={1}
       mass={100}
+      onSleep={() =>
+        setIsSleepList((prev) => [
+          ...prev.slice(0, id),
+          true,
+          ...prev.slice(id + 1),
+        ])
+      }
       ccd
     >
       <group>

@@ -25,7 +25,12 @@ const Dices = () => {
   return (
     <group position={[1, 0, 0]}>
       {INITIAL_DICEPOSITIONS.map((position, index) => (
-        <Dice id={index} position={position} setIsSleepList={setIsSleepList} />
+        <Dice
+          key={index}
+          id={index}
+          position={position}
+          setIsSleepList={setIsSleepList}
+        />
       ))}
     </group>
   );

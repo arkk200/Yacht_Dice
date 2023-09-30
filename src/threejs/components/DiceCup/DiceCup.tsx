@@ -15,9 +15,9 @@ const DiceCup = () => {
 
   const rigidBodyRef = useRef<RapierRigidBody>(null);
 
-  useShakeDiceEffect(rigidBodyRef);
-
   useRollDiceEffect(rigidBodyRef);
+
+  useShakeDiceEffect(rigidBodyRef);
 
   return (
     <group>
