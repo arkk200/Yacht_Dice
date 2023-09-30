@@ -10,36 +10,36 @@ const getDiceNumberFrom = (
   const { x, y, z } = angle;
 
   const eps = Math.PI / 4;
-  const closesZero = (angle: number) => Math.abs(angle) < eps;
-  const closesHalfPi = (angle: number) => Math.abs(angle - 0.5 * Math.PI) < eps;
-  const closesMinusHalfPi = (angle: number) =>
+  const closeZero = (angle: number) => Math.abs(angle) < eps;
+  const closeHalfPi = (angle: number) => Math.abs(angle - 0.5 * Math.PI) < eps;
+  const closeMinusHalfPi = (angle: number) =>
     Math.abs(0.5 * Math.PI + angle) < eps;
-  const closesPiOrMinusPi = (angle: number) =>
+  const closePiOrMinusPi = (angle: number) =>
     Math.abs(Math.PI - angle) < eps || Math.abs(Math.PI + angle) < eps;
 
   if (
-    (closesZero(z) && closesZero(x)) ||
-    (closesPiOrMinusPi(z) && closesPiOrMinusPi(x))
+    (closeZero(z) && closeZero(x)) ||
+    (closePiOrMinusPi(z) && closePiOrMinusPi(x))
   )
     return 1;
   if (
-    (closesZero(x) && closesHalfPi(z)) ||
-    (closesPiOrMinusPi(x) && closesMinusHalfPi(z))
+    (closeZero(x) && closeHalfPi(z)) ||
+    (closePiOrMinusPi(x) && closeMinusHalfPi(z))
   )
     return 2;
   if (
-    (closesMinusHalfPi(x) && closesZero(y)) ||
-    (closesHalfPi(x) && closesPiOrMinusPi(y))
+    (closeMinusHalfPi(x) && closeZero(y)) ||
+    (closeHalfPi(x) && closePiOrMinusPi(y))
   )
     return 3;
   if (
-    (closesHalfPi(x) && closesZero(y)) ||
-    (closesMinusHalfPi(x) && closesPiOrMinusPi(y))
+    (closeHalfPi(x) && closeZero(y)) ||
+    (closeMinusHalfPi(x) && closePiOrMinusPi(y))
   )
     return 4;
   if (
-    (closesZero(x) && closesMinusHalfPi(z)) ||
-    (closesPiOrMinusPi(x) && closesHalfPi(z))
+    (closeZero(x) && closeMinusHalfPi(z)) ||
+    (closePiOrMinusPi(x) && closeHalfPi(z))
   )
     return 5;
   return 6;

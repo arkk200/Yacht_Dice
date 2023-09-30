@@ -1,7 +1,3 @@
-import { dicePipListAtom } from "@/threejs/store/dicePipList";
-import { isAllDiceSleptAtom } from "@/threejs/store/isAllDiceSlept";
-import { useEffect } from "react";
-import { useRecoilValue } from "recoil";
 import Dice from "./Dice/Dice";
 
 const INITIAL_DICEPOSITIONS: [number, number, number][] = [
@@ -13,15 +9,6 @@ const INITIAL_DICEPOSITIONS: [number, number, number][] = [
 ];
 
 const Dices = () => {
-  const isAllDiceSlept = useRecoilValue(isAllDiceSleptAtom);
-  const dicePipList = useRecoilValue(dicePipListAtom);
-
-  useEffect(() => {
-    if (isAllDiceSlept) {
-      console.log(dicePipList);
-    }
-  }, [isAllDiceSlept, dicePipList]);
-
   return (
     <group position={[1, 0, 0]}>
       {INITIAL_DICEPOSITIONS.map((position, index) => (
