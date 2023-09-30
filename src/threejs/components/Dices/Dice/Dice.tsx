@@ -32,6 +32,7 @@ const Dice = ({ id, position }: Props) => {
   };
 
   useEffect(() => {
+    /* TODO :: 코드 다시 짜기 */
     if (status === "주사위 눈금 보이기") {
       const rigidBody = rigidBodyRef.current;
       if (!rigidBody) return;
@@ -54,8 +55,6 @@ const Dice = ({ id, position }: Props) => {
       });
 
       const number = dicePipList[id];
-      const { x, y, z } = rotation;
-      console.log(number, x.toFixed(3), y.toFixed(3), z.toFixed(3));
       const nextRotationMap: Record<number, object> = {
         1: { y: 0 },
         2: { y: 0 },
