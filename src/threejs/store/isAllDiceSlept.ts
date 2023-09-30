@@ -1,6 +1,10 @@
-import { atom } from "recoil";
+import { selector } from "recoil";
+import { isSleptListAtom } from "./isSleptList";
 
-export const isAllDiceSleptAtom = atom<boolean>({
+export const isAllDiceSleptAtom = selector<boolean>({
   key: "isAllDiceSleptAtom",
-  default: false,
+  get: ({ get }) => {
+    const isSleptList = get(isSleptListAtom);
+    return isSleptList.every((isSlept) => isSlept);
+  },
 });

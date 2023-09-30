@@ -41,6 +41,7 @@ const useRollDiceEffect = (rigidBodyRef: RefObject<RapierRigidBody>) => {
     }
   }, [rigidBodyRef, status, setStatus]);
 
+  /* TODO :: 상태 변경하는 useEffect 나중에 고민해서 처리하기 */
   useEffect(() => {
     if (status === "주사위 굴리기" && isAllDiceSlept) {
       setStatus("주사위 눈금 보이기");

@@ -1,19 +1,14 @@
 import { RapierRigidBody, euler, quat } from "@react-three/rapier";
 import { RefObject } from "react";
 
-const useGetDiceNumber = () => {
-  const getDiceNumber = (diceRigidRef: RefObject<RapierRigidBody>) => {
-    const angle = euler().setFromQuaternion(
-      quat(diceRigidRef.current?.rotation())
-    );
+const getDiceNumberFrom = (
+  diceRigidRef: RefObject<RapierRigidBody>
+): number => {
+  const angle = euler().setFromQuaternion(
+    quat(diceRigidRef.current?.rotation())
+  );
+  const { x, y, z } = angle;
 
-    return getCalculatedDiceNumber(angle.x, angle.y, angle.z);
-  };
-
-  return { getDiceNumber };
-};
-
-const getCalculatedDiceNumber = (x: number, y: number, z: number): number => {
   const eps = Math.PI / 4;
   const closesZero = (angle: number) => Math.abs(angle) < eps;
   const closesHalfPi = (angle: number) => Math.abs(angle - 0.5 * Math.PI) < eps;
@@ -50,4 +45,4 @@ const getCalculatedDiceNumber = (x: number, y: number, z: number): number => {
   return 6;
 };
 
-export default useGetDiceNumber;
+export default getDiceNumberFrom;
