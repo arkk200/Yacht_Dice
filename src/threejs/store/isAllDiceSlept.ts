@@ -1,10 +1,10 @@
 import { selector } from "recoil";
-import { isSleptListAtom } from "./isSleptList";
+import { dicePipListAtom } from "./dicePipList";
 
 export const isAllDiceSleptAtom = selector<boolean>({
   key: "isAllDiceSleptAtom",
   get: ({ get }) => {
-    const isSleptList = get(isSleptListAtom);
-    return isSleptList.every((isSlept) => isSlept);
+    const dicePipList = get(dicePipListAtom);
+    return dicePipList.every((dicePip) => dicePip);
   },
 });

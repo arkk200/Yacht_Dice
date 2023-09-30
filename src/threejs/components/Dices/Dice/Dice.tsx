@@ -1,9 +1,7 @@
-import { statusAtom } from "@/store/status";
 import { dicePipListAtom } from "@/threejs/store/dicePipList";
-import { isSleptListAtom } from "@/threejs/store/isSleptList";
 import { RapierRigidBody, RigidBody } from "@react-three/rapier";
-import { useEffect, useMemo, useRef } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useMemo, useRef } from "react";
+import { useSetRecoilState } from "recoil";
 import { DoubleSide } from "three";
 import useDiceGeometries from "./hooks/useDiceGeometries.hook";
 import getDiceNumberFrom from "./utils/getDiceNumberFrom";
@@ -17,20 +15,16 @@ const Dice = ({ id, position }: Props) => {
   const rigidBodyRef = useRef<RapierRigidBody>(null);
 
   const { geometry, innerGeometry } = useMemo(useDiceGeometries, []);
-  const [status] = useRecoilState(statusAtom);
-  const setIsDiceSleptList = useSetRecoilState(isSleptListAtom);
   const setDicePipList = useSetRecoilState(dicePipListAtom);
 
-  useEffect(() => {
-    if (status === "주사위 눈금 보이기") {
-      const number = getDiceNumberFrom(rigidBodyRef);
-      setDicePipList((prev) => [
-        ...prev.slice(0, id),
-        number,
-        ...prev.slice(id + 1),
-      ]);
-    }
-  }, [id, status, setDicePipList]);
+  const onDiceSleep = () => {
+    const number = getDiceNumberFrom(rigidBodyRef);
+    setDicePipList((prev) => [
+      ...prev.slice(0, id),
+      number,
+      ...prev.slice(id + 1),
+    ]);
+  };
 
   return (
     <RigidBody
@@ -41,13 +35,7 @@ const Dice = ({ id, position }: Props) => {
       position={position}
       scale={1}
       mass={100}
-      onSleep={() =>
-        setIsDiceSleptList((prev) => [
-          ...prev.slice(0, id),
-          true,
-          ...prev.slice(id + 1),
-        ])
-      }
+      onSleep={onDiceSleep}
       ccd
     >
       <group>
