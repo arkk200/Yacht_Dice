@@ -1,30 +1,25 @@
 import { color } from "@/styles/theme.styles";
 import { styled } from "styled-components";
 
-export const Container = styled.div`
-  width: 32vw;
-  height: 100%;
-  flex-shrink: 0;
-`;
-
 export const ScoreSheetBackground = styled.div`
   display: flex;
-  width: 27.5vw;
+  flex-shrink: 0;
+  width: 27.5%;
   height: 100%;
-  padding: 0.5vw;
+  padding: 0.5%;
   box-sizing: border-box;
   background-color: ${color.gray10};
 `;
 
 export const StyledScoreSheet = styled.div`
   flex: 1;
-  border: 0.2vw solid #a2a093;
-  padding: 0.5vw;
+  border: min(0.2vw, 0.3vh) solid #a2a093;
+  padding: 0.5%;
 `;
 
 export const BonusDesc = styled.p`
   display: flex;
   align-items: center;
   height: 3.5%;
-  font-size: 1.5vw;
+  font-size: min(1.5vw, 3vh);
 `;

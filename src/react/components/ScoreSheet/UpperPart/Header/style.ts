@@ -20,19 +20,19 @@ export const TurnBox = styled.div`
 `;
 
 export const Turn = styled.p`
-  font-size: 2.25vw;
+  font-size: min(2.25vw, 4.5vh);
 `;
 
 export const TurnCount = styled.p`
-  font-size: 3vw;
+  font-size: min(3vw, 6vh);
 `;
 
 export const Categories = styled.p`
   display: flex;
   align-items: center;
   height: 28%;
-  padding-left: 0.5vw;
-  font-size: 2vw;
+  padding-left: min(0.5vw, 1vh);
+  font-size: min(2vw, 4vh);
   color: ${color.gray10};
   background-color: ${color.gray80};
 `;
@@ -43,11 +43,11 @@ export const ProfileBox = styled.div`
   justify-content: center;
   width: 25%;
   box-sizing: border-box;
-  border: 0.2vw solid ${color.gray80};
+  border: min(0.2vw, 0.4vh) solid ${color.gray80};
 `;
 
 export const ProfileImage = styled.img`
-  max-width: 5vw;
+  max-width: min(5vw, 10vh);
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   object-fit: cover;

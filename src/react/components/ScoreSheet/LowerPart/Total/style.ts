@@ -11,11 +11,11 @@ export const TotalText = styled.p`
   align-items: center;
   width: 50%;
   height: 100%;
-  padding-left: 0.5vw;
+  padding-left: min(0.5vw, 1vh);
   color: ${color.gray10};
   background-color: ${color.gray80};
-  border: 0.2vw solid ${color.gray80};
-  font-size: 1.75vw;
+  border: min(0.2vw, 0.5vh) solid ${color.gray80};
+  font-size: min(1.75vw, 3.5vh);
   box-sizing: border-box;
 `;
 
@@ -25,7 +25,7 @@ export const TotalScoreText = styled.p`
   justify-content: center;
   width: 25%;
   height: 100%;
-  border: 0.2vw solid ${color.gray80};
-  font-size: 2.25vw;
+  border: min(0.2vw, 0.5vh) solid ${color.gray80};
+  font-size: min(2.25vw, 4.5vh);
   box-sizing: border-box;
 `;
