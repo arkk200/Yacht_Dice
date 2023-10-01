@@ -14,7 +14,6 @@ const StatusWrapper = ({ children }: Props) => {
   const count = useRecoilValue(countAtom);
 
   useEffect(() => {
-    console.log(status);
     if (status === "주사위 굴리기" && isAllDiceSlept) {
       setStatus("주사위 눈금 보이기");
     }

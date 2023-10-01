@@ -1,6 +1,7 @@
 import "@/styles/fonts.styles.css";
 import { css, styled } from "styled-components";
 import useIsWindowFlattened from "./hooks/useIsAppFlattened";
+import ControlPanal from "./react/components/ControlPanal/ControlPanel";
 import ScoreSheet from "./react/components/ScoreSheet/ScoreSheet";
 import GlobalStyle from "./styles/global.styles";
 import Scene from "./threejs/components/Scene/Scene";
@@ -13,7 +14,10 @@ function App() {
       <GlobalStyle />
       <StyledApp $isWindowFlattened={isWindowFlattened}>
         <ScoreSheet />
-        <Scene />
+        <GameDisplay>
+          <ControlPanal />
+          <Scene />
+        </GameDisplay>
       </StyledApp>
     </>
   );
@@ -41,4 +45,11 @@ const StyledApp = styled.div<{ $isWindowFlattened: boolean }>`
   background-repeat: no-repeat;
   background-size: cover;
   background-color: white;
+`;
+
+const GameDisplay = styled.div`
+  position: relative;
+  flex: 1;
+  width: 100%;
+  aspect-ratio: 528/1080;
 `;
